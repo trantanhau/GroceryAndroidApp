@@ -11,8 +11,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.groceryandroidapp.adapters.HomeAdapter;
 import com.example.groceryandroidapp.adapters.PopularProductAdapters;
 import com.example.groceryandroidapp.databinding.FragmentHomeBinding;
+import com.example.groceryandroidapp.models.HomeCategoryModel;
 import com.example.groceryandroidapp.models.PopularProductModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,9 +26,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
-    RecyclerView popularProductRecycle;
+    RecyclerView popularProductRecycle, homeCategoryRecycle;
+
+    // popular products
     List<PopularProductModel> popularProductModelList;
     PopularProductAdapters popularProductAdapters;
+
+    // home  category
+    List<HomeCategoryModel> homeCategoryModelList;
+    HomeAdapter homeAdapter;
+
     FirebaseFirestore db;
     private FragmentHomeBinding binding;
 
@@ -37,6 +46,7 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        // Popular Product
         popularProductRecycle = binding.popularProduct;
         popularProductRecycle.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         popularProductModelList = new ArrayList<>();
@@ -58,6 +68,31 @@ public class HomeFragment extends Fragment {
                         }
                     }
                 });
+
+        // Home Category
+        homeCategoryRecycle = binding.exploreProduct;
+
+        homeCategoryRecycle.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        homeCategoryModelList = new ArrayList<>();
+        homeAdapter = new HomeAdapter(getActivity(), homeCategoryModelList);
+        homeCategoryRecycle.setAdapter(homeAdapter);
+        db.collection("HomeCategory")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                HomeCategoryModel homeCategoryModel = document.toObject(HomeCategoryModel.class);
+                                homeCategoryModelList.add(homeCategoryModel);
+                                homeAdapter.notifyDataSetChanged();
+                            }
+                        } else {
+                            Toast.makeText(getActivity(), "Error "+task.getException(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
         return root;
     }
 

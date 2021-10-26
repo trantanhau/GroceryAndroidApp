@@ -1,6 +1,7 @@
 package com.example.groceryandroidapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.groceryandroidapp.R;
+import com.example.groceryandroidapp.activities.ProductsActivity;
 import com.example.groceryandroidapp.models.PopularProductModel;
 
 import java.util.List;
@@ -41,6 +43,15 @@ public class PopularProductAdapters extends RecyclerView.Adapter<PopularProductA
         holder.description.setText(popularProductModelsList.get(position).getDescription());
         holder.rating.setText(popularProductModelsList.get(position).getRating());
         holder.discount.setText(popularProductModelsList.get(position).getDiscount());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ProductsActivity.class);
+                intent.putExtra("type", popularProductModelsList.get(position).getType());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

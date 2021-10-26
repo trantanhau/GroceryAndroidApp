@@ -1,4 +1,4 @@
-package com.example.groceryandroidapp;
+package com.example.groceryandroidapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.groceryandroidapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {
@@ -25,7 +26,9 @@ public class HomeActivity extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
         if (firebaseAuth.getCurrentUser() != null){
             progressBar.setVisibility(View.VISIBLE);
+            startActivity(new Intent(HomeActivity.this, MainActivity.class));
             Toast.makeText(this, "Please wait you are already logged in !",  Toast.LENGTH_SHORT).show();
+            finish();
         }
 
     }

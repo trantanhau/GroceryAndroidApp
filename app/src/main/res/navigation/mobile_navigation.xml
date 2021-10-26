@@ -12,14 +12,34 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.groceryandroidapp.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_profile"
+        android:name="com.example.groceryandroidapp.ui.profile.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.groceryandroidapp.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_category"
+        android:name="com.example.groceryandroidapp.ui.category.CategoryFragment"
+        android:label="@string/category"
+        tools:layout="@layout/fragment_category" />
+    <fragment
+        android:id="@+id/nav_offer"
+        android:name="com.example.groceryandroidapp.OfferFragment"
+        android:label="@string/offer"
+        tools:layout="@layout/fragment_offer" />
+    <fragment
+        android:id="@+id/nav_newProduct"
+        android:name="com.example.groceryandroidapp.NewProductFragment"
+        android:label="@string/new_product"
+        tools:layout="@layout/fragment_new_product" />
+    <fragment
+        android:id="@+id/nav_order"
+        android:name="com.example.groceryandroidapp.OrderFragment"
+        android:label="@string/order"
+        tools:layout="@layout/fragment_order" />
+    <fragment
+        android:id="@+id/nav_cart"
+        android:name="com.example.groceryandroidapp.CartFragment"
+        android:label="@string/cart"
+        tools:layout="@layout/fragment_cart" />
 </navigation>

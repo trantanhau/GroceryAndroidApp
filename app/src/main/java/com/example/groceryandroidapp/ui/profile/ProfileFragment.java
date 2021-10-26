@@ -1,4 +1,4 @@
-package com.example.groceryandroidapp.ui.home;
+package com.example.groceryandroidapp.ui.profile;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,16 +7,17 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import com.example.groceryandroidapp.databinding.FragmentHomeBinding;
 
-public class HomeFragment extends Fragment {
+import com.example.groceryandroidapp.databinding.FragmentProfileBinding;
 
-    private FragmentHomeBinding binding;
+public class ProfileFragment extends Fragment {
+
+    private FragmentProfileBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         return root;

@@ -13,9 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.groceryandroidapp.adapters.HomeAdapter;
 import com.example.groceryandroidapp.adapters.PopularProductAdapters;
+import com.example.groceryandroidapp.adapters.RecommendProductAdapter;
 import com.example.groceryandroidapp.databinding.FragmentHomeBinding;
 import com.example.groceryandroidapp.models.HomeCategoryModel;
 import com.example.groceryandroidapp.models.PopularProductModel;
+import com.example.groceryandroidapp.models.RecommendProductModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
-    RecyclerView popularProductRecycle, homeCategoryRecycle;
+    RecyclerView popularProductRecycle, homeCategoryRecycle, recommendProductRecycle;
 
     // popular products
     List<PopularProductModel> popularProductModelList;
@@ -35,6 +37,10 @@ public class HomeFragment extends Fragment {
     // home  category
     List<HomeCategoryModel> homeCategoryModelList;
     HomeAdapter homeAdapter;
+
+    // recommend product
+    List<RecommendProductModel> recommendProductModelList;
+    RecommendProductAdapter recommendProductAdapter;
 
     FirebaseFirestore db;
     private FragmentHomeBinding binding;
@@ -92,6 +98,32 @@ public class HomeFragment extends Fragment {
                         }
                     }
                 });
+
+        // Recommend Product
+        recommendProductRecycle = binding.recommendProduct;
+
+        recommendProductRecycle.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        recommendProductModelList = new ArrayList<>();
+        recommendProductAdapter = new RecommendProductAdapter(getActivity(), recommendProductModelList);
+        recommendProductRecycle.setAdapter(recommendProductAdapter);
+        db.collection("RecommendProducts")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                RecommendProductModel recommendProductModel = document.toObject(RecommendProductModel.class);
+                                recommendProductModelList.add(recommendProductModel);
+                                recommendProductAdapter.notifyDataSetChanged();
+                            }
+                        } else {
+                            Toast.makeText(getActivity(), "Error "+task.getException(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
 
         return root;
     }

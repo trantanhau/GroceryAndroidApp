@@ -25,7 +25,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     Context context;
     List<HomeCategoryModel> categoryModelList;
-    HomeCategoryModel homeCategoryModel;
 
     @NonNull
     @Override

@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +30,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
+    ScrollView scrollView;
+    ProgressBar progressBar;
+
     RecyclerView popularProductRecycle, homeCategoryRecycle, recommendProductRecycle;
 
     // popular products
@@ -51,6 +56,12 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        scrollView = binding.scrollView;
+        progressBar = binding.progressBar;
+
+        progressBar.setVisibility(View.VISIBLE);
+        scrollView.setVisibility(View.GONE);
+
 
         // Popular Product
         popularProductRecycle = binding.popularProduct;
@@ -68,6 +79,9 @@ public class HomeFragment extends Fragment {
                                 PopularProductModel popularProductModel = document.toObject(PopularProductModel.class);
                                 popularProductModelList.add(popularProductModel);
                                 popularProductAdapters.notifyDataSetChanged();
+
+                                progressBar.setVisibility(View.GONE);
+                                scrollView.setVisibility(View.VISIBLE);
                             }
                         } else {
                             Toast.makeText(getActivity(), "Error "+task.getException(), Toast.LENGTH_SHORT).show();

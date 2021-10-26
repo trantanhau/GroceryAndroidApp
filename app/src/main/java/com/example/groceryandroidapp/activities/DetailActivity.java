@@ -3,6 +3,7 @@ package com.example.groceryandroidapp.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,6 +13,9 @@ import com.example.groceryandroidapp.R;
 import com.example.groceryandroidapp.models.ProductModel;
 
 public class DetailActivity extends AppCompatActivity {
+    TextView quantity;
+    int totalQuantity = 1;
+    int totalPrice = 0;
     ImageView detailImage;
     TextView price, rating;
     Button addToCartButton;
@@ -29,6 +33,7 @@ public class DetailActivity extends AppCompatActivity {
             productModel = (ProductModel) object;
         }
 
+        quantity =  findViewById(R.id.quantity);
         detailImage = findViewById(R.id.product_detail_img);
         price = findViewById(R.id.product_detail_price);
         rating = findViewById(R.id.product_detail_rating);
@@ -41,12 +46,38 @@ public class DetailActivity extends AppCompatActivity {
             Glide.with(getApplicationContext()).load(productModel.getImg_url()).into(detailImage);
             rating.setText(productModel.getRating());
             price.setText("Price:"+productModel.getPrice()+ "/kg");
+
+            totalPrice = productModel.getPrice() * totalQuantity;
+
             if (productModel.getType().equals("milk")){
                 price.setText("Price:"+productModel.getPrice()+ "/lit");
+                totalPrice = productModel.getPrice() * totalQuantity;
+
             }
             if (productModel.getType().equals("drinks")){
                 price.setText("Price:"+productModel.getPrice()+ "/chai");
+                totalPrice = productModel.getPrice() * totalQuantity;
+
             }
         }
+
+        addItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (totalQuantity < 10){
+                    totalQuantity++;
+                    quantity.setText(String.valueOf(totalQuantity));
+                }
+            }
+        });
+        removeItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (totalQuantity > 0){
+                    totalQuantity--;
+                    quantity.setText(String.valueOf(totalQuantity));
+                }
+            }
+        });
     }
 }

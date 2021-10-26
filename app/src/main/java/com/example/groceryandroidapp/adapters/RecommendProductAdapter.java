@@ -37,7 +37,7 @@ public class RecommendProductAdapter extends RecyclerView.Adapter<RecommendProdu
         Glide.with(context).load(recommendProductModelList.get(position).getImg_url()).into(holder.recommendProductImg);
         holder.name.setText(recommendProductModelList.get(position).getName());
         holder.description.setText(recommendProductModelList.get(position).getDescription());
-        holder.price.setText(recommendProductModelList.get(position).getPrice());
+        holder.price.setText(Integer.toString(recommendProductModelList.get(position).getPrice()));
         holder.rating.setText(recommendProductModelList.get(position).getRating());
     }
 

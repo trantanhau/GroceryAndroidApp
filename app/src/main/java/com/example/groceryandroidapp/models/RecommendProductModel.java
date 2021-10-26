@@ -4,13 +4,13 @@ public class RecommendProductModel {
     String name;
     String description;
     String img_url;
-    String price;
+    int price;
     String rating;
 
     public RecommendProductModel() {
     }
 
-    public RecommendProductModel(String name, String description, String img_url, String price, String rating) {
+    public RecommendProductModel(String name, String description, String img_url, int price, String rating) {
         this.name = name;
         this.description = description;
         this.img_url = img_url;
@@ -43,11 +43,11 @@ public class RecommendProductModel {
         this.img_url = img_url;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

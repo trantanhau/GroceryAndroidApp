@@ -8,13 +8,13 @@ public class ProductModel  implements Serializable
     String description;
     String img_url;
     String rating;
-    String price;
+    int price;
     String type;
 
     public ProductModel() {
     }
 
-    public ProductModel(String name, String description, String img_url, String rating, String price, String type) {
+    public ProductModel(String name, String description, String img_url, String rating, int price, String type) {
         this.name = name;
         this.description = description;
         this.img_url = img_url;
@@ -54,11 +54,11 @@ public class ProductModel  implements Serializable
         this.rating = rating;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

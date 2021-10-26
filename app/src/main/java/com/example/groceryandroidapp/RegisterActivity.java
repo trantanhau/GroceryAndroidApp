@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
     TextView signIn;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase database;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
+
+        progressBar = findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.GONE);
 
         signUp = findViewById(R.id.register_button);
         signIn = findViewById(R.id.sign_in);
@@ -49,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 createUser();
+                progressBar.setVisibility(View.VISIBLE);
             }
         });
 
@@ -80,9 +86,11 @@ public class RegisterActivity extends AppCompatActivity {
                     UserModel userModel =  new UserModel(userName, userEmail, userPassword);
                     String id = task.getResult().getUser().getUid();
                     database.getReference().child("Users").child(id).setValue(userModel);
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(RegisterActivity.this, "Error" + task.getException(), Toast.LENGTH_SHORT).show();
                 }
             }

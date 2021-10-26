@@ -1,6 +1,7 @@
 package com.example.groceryandroidapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.groceryandroidapp.R;
+import com.example.groceryandroidapp.activities.ProductsActivity;
 import com.example.groceryandroidapp.models.HomeCategoryModel;
 
 import java.util.List;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
+public class HomeCategoryAdapter extends RecyclerView.Adapter<HomeCategoryAdapter.ViewHolder> {
 
-    public HomeAdapter(Context context, List<HomeCategoryModel> categoryList) {
+    public HomeCategoryAdapter(Context context, List<HomeCategoryModel> categoryList) {
         this.context = context;
         this.categoryModelList = categoryList;
     }
@@ -36,6 +38,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Glide.with(context).load(categoryModelList.get(position).getImg_url()).into(holder.categoryImg);
         holder.name.setText(categoryModelList.get(position).getName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ProductsActivity.class);
+                intent.putExtra("type", categoryModelList.get(holder.getAdapterPosition()).getType());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

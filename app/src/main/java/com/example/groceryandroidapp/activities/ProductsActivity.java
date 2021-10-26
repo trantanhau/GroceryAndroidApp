@@ -80,5 +80,47 @@ public class ProductsActivity extends AppCompatActivity {
                 }
             });
         }
+
+        if (type != null && type.equalsIgnoreCase("milk")){
+            firestore.collection("Products").whereEqualTo("type", "milk").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                    for (DocumentSnapshot documentSnapshot: task.getResult().getDocuments()){
+                        ProductModel productModel = documentSnapshot.toObject(ProductModel.class);
+                        productModelList.add(productModel);
+                        productAdapter.notifyDataSetChanged();
+                    }
+                }
+            });
+        }
+
+        if (type != null && type.equalsIgnoreCase("egg")){
+            firestore.collection("Products").whereEqualTo("type", "egg").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                    for (DocumentSnapshot documentSnapshot: task.getResult().getDocuments()){
+                        ProductModel productModel = documentSnapshot.toObject(ProductModel.class);
+                        productModelList.add(productModel);
+                        productAdapter.notifyDataSetChanged();
+                    }
+                }
+            });
+        }
+
+        if (type != null && type.equalsIgnoreCase("fish")){
+            firestore.collection("Products").whereEqualTo("type", "fish").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                    for (DocumentSnapshot documentSnapshot: task.getResult().getDocuments()){
+                        ProductModel productModel = documentSnapshot.toObject(ProductModel.class);
+                        productModelList.add(productModel);
+                        productAdapter.notifyDataSetChanged();
+                    }
+                }
+            });
+        }
     }
 }

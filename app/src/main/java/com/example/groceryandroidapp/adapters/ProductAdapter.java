@@ -37,7 +37,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.name.setText(productModelList.get(position).getName());
         holder.description.setText(productModelList.get(position).getDescription());
         holder.rating.setText(productModelList.get(position).getRating());
-        holder.price.setText(productModelList.get(position).getPrice());
+        holder.price.setText(productModelList.get(position).getPrice()+"/kg");
+
+        if (productModelList.get(position).getType().equals("eggs")){
+            holder.price.setText(productModelList.get(position).getPrice()+"/hop");
+        }
+        if (productModelList.get(position).getType().equals("milk")){
+            holder.price.setText(productModelList.get(position).getPrice()+"/lit");
+        }
+        if (productModelList.get(position).getType().equals("drinks")){
+            holder.price.setText(productModelList.get(position).getPrice()+"/chai");
+        }
 
     }
 

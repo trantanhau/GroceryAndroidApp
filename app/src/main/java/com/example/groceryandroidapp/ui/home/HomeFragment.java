@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.groceryandroidapp.adapters.HomeAdapter;
+import com.example.groceryandroidapp.adapters.HomeCategoryAdapter;
 import com.example.groceryandroidapp.adapters.PopularProductAdapters;
 import com.example.groceryandroidapp.adapters.RecommendProductAdapter;
 import com.example.groceryandroidapp.databinding.FragmentHomeBinding;
@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
 
     // home  category
     List<HomeCategoryModel> homeCategoryModelList;
-    HomeAdapter homeAdapter;
+    HomeCategoryAdapter homeCategoryAdapter;
 
     // recommend product
     List<RecommendProductModel> recommendProductModelList;
@@ -94,8 +94,8 @@ public class HomeFragment extends Fragment {
 
         homeCategoryRecycle.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         homeCategoryModelList = new ArrayList<>();
-        homeAdapter = new HomeAdapter(getActivity(), homeCategoryModelList);
-        homeCategoryRecycle.setAdapter(homeAdapter);
+        homeCategoryAdapter = new HomeCategoryAdapter(getActivity(), homeCategoryModelList);
+        homeCategoryRecycle.setAdapter(homeCategoryAdapter);
         db.collection("HomeCategory")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -105,7 +105,7 @@ public class HomeFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 HomeCategoryModel homeCategoryModel = document.toObject(HomeCategoryModel.class);
                                 homeCategoryModelList.add(homeCategoryModel);
-                                homeAdapter.notifyDataSetChanged();
+                                homeCategoryAdapter.notifyDataSetChanged();
                             }
                         } else {
                             Toast.makeText(getActivity(), "Error "+task.getException(), Toast.LENGTH_SHORT).show();

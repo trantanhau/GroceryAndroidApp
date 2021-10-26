@@ -48,7 +48,7 @@ public class PopularProductAdapters extends RecyclerView.Adapter<PopularProductA
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ProductsActivity.class);
-                intent.putExtra("type", popularProductModelsList.get(position).getType());
+                intent.putExtra("type", popularProductModelsList.get(holder.getAdapterPosition()).getType());
                 context.startActivity(intent);
             }
         });

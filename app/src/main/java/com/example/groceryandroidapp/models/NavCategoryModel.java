@@ -2,6 +2,21 @@ package com.example.groceryandroidapp.models;
 
 public class NavCategoryModel {
     String name;
+    String type;
+    String description;
+    String img_url;
+    String discount;
+
+    public NavCategoryModel() {
+    }
+
+    public NavCategoryModel(String name, String description, String img_url, String discount) {
+        this.name = name;
+        this.description = description;
+        this.img_url = img_url;
+        this.discount = discount;
+    }
+
 
     public String getName() {
         return name;
@@ -35,18 +50,11 @@ public class NavCategoryModel {
         this.discount = discount;
     }
 
-    String description;
-    String img_url;
-    String  discount;
-
-    public NavCategoryModel() {
+    public String getType() {
+        return type;
     }
 
-    public NavCategoryModel(String name, String description, String img_url, String discount) {
-        this.name = name;
-        this.description = description;
-        this.img_url = img_url;
-        this.discount = discount;
+    public void setType(String type) {
+        this.type = type;
     }
-
 }

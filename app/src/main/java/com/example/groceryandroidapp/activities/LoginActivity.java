@@ -75,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 }
                 else {
                     progressBar.setVisibility(View.GONE);

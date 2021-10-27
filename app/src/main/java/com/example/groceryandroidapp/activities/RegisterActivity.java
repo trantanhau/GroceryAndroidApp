@@ -89,6 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
                     database.getReference().child("Users").child(id).setValue(userModel);
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                 }
                 else {
                     progressBar.setVisibility(View.GONE);

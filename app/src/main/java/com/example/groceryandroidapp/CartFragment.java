@@ -37,7 +37,7 @@ public class CartFragment extends Fragment {
     FirebaseAuth auth;
     FirebaseFirestore db;
 
-    TextView totalAmount;
+    TextView overTotalAmount;
     RecyclerView recyclerView;
     CartAdapter cartAdapter;
     List<CartModel> cartModelList;
@@ -56,9 +56,9 @@ public class CartFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         recyclerView = root.findViewById(R.id.cart_list);
-        totalAmount = root.findViewById(R.id.total_amount);
+        overTotalAmount = root.findViewById(R.id.total_amount);
         buynow = root.findViewById(R.id.add_to_cart_button);
-        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mMessageReceiver, new IntentFilter("My total Amount"));
+//        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mMessageReceiver, new IntentFilter("My total Amount"));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -72,10 +72,14 @@ public class CartFragment extends Fragment {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                        String documentId = documentSnapshot.getId();
                         CartModel cartModel = documentSnapshot.toObject(CartModel.class);
+
+                        cartModel.setDocumentId(documentId);
                         cartModelList.add(cartModel);
                         cartAdapter.notifyDataSetChanged();
                     }
+                    calculateTotalAmount(cartModelList);
                 }
             }
         });
@@ -91,12 +95,20 @@ public class CartFragment extends Fragment {
         return root;
     }
 
-    public BroadcastReceiver mMessageReceiver =  new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            int totalBill = intent.getIntExtra("totalAmount",0);
-            totalAmount.setText("Total Bill: "+totalBill);
+    private void calculateTotalAmount(List<CartModel> cartModelList) {
+        double totalAmount = 0.0;
+        for (CartModel cartModel : this.cartModelList){
+            totalAmount += cartModel.getTotalPrice();
         }
-    };
+        overTotalAmount.setText("Total Amount: "+totalAmount);
+    }
+
+//    public BroadcastReceiver mMessageReceiver =  new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            int totalBill = intent.getIntExtra("totalAmount",0);
+//            totalAmount.setText("Total Bill: "+totalBill);
+//        }
+//    };
 
 }

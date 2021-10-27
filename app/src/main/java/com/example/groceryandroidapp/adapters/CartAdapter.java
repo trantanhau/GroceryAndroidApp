@@ -73,11 +73,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             }
         });
 
-//        totalPrice = totalPrice + cartModelList.get(position).getTotalPrice();
-//        Intent intent  = new Intent("My total Amount");
-//        intent.putExtra("totalAmount", totalPrice);
-//        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-
     }
 
     @Override

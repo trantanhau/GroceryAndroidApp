@@ -58,7 +58,6 @@ public class CartFragment extends Fragment {
         recyclerView = root.findViewById(R.id.cart_list);
         overTotalAmount = root.findViewById(R.id.total_amount);
         buynow = root.findViewById(R.id.add_to_cart_button);
-//        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mMessageReceiver, new IntentFilter("My total Amount"));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -102,13 +101,5 @@ public class CartFragment extends Fragment {
         }
         overTotalAmount.setText("Total Amount: "+totalAmount);
     }
-
-//    public BroadcastReceiver mMessageReceiver =  new BroadcastReceiver() {
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            int totalBill = intent.getIntExtra("totalAmount",0);
-//            totalAmount.setText("Total Bill: "+totalBill);
-//        }
-//    };
 
 }

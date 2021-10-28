@@ -10,8 +10,8 @@
     <string name="menu_home">Home</string>
     <string name="profile">Profile</string>
     <string name="category">Category</string>
-    <string name="offer">Offers</string>
-    <string name="new_product">New Product</string>
+<!--    <string name="offer">Offers</string>-->
+<!--    <string name="new_product">New Product</string>-->
     <string name="order">My Order</string>
     <string name="cart">My Cart</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
